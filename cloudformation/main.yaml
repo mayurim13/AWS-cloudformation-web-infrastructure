@@ -168,6 +168,27 @@ Resources:
       Tags:
         - Key: Name
           Value: cfn-web-server-b
+          WebTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      VpcId: !Ref WebVPC
+      Protocol: HTTP
+      Port: 80
+      TargetType: instance
+      HealthCheckProtocol: HTTP
+      HealthCheckPort: traffic-port
+      HealthCheckPath: /
+      Matcher:
+        HttpCode: '200'
+      Targets:
+        - Id: !Ref WebServerA
+          Port: 80
+        - Id: !Ref WebServerB
+          Port: 80
+      Tags:
+        - Key: Name
+          Value: cfn-web-target-group
+
 
 
 
