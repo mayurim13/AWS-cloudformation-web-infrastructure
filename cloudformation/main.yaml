@@ -147,6 +147,28 @@ Resources:
             cp -r aws-cloudformation-web-infrastructure/website/* /var/www/html/
 
             systemctl restart httpd
+            WebServerA:
+    Type: AWS::EC2::Instance
+    Properties:
+      LaunchTemplate:
+        LaunchTemplateId: !Ref WebLaunchTemplate
+        Version: !GetAtt WebLaunchTemplate.LatestVersionNumber
+      SubnetId: !Ref PublicSubnetA
+      Tags:
+        - Key: Name
+          Value: cfn-web-server-a
+
+  WebServerB:
+    Type: AWS::EC2::Instance
+    Properties:
+      LaunchTemplate:
+        LaunchTemplateId: !Ref WebLaunchTemplate
+        Version: !GetAtt WebLaunchTemplate.LatestVersionNumber
+      SubnetId: !Ref PublicSubnetB
+      Tags:
+        - Key: Name
+          Value: cfn-web-server-b
+
 
 
       
