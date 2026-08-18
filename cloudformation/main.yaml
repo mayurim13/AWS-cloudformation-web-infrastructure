@@ -202,7 +202,15 @@ Resources:
       Tags:
         - Key: Name
           Value: cfn-web-alb
-
+          WebListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref WebLoadBalancer
+      Protocol: HTTP
+      Port: 80
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref WebTargetGroup
 
 
 
