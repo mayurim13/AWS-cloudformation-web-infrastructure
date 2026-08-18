@@ -1,2 +1,17 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: AWS CloudFormation Web Infrastructure
+
+Description: >
+  CloudFormation template for a highly available web infrastructure
+  with VPC, public and private subnets, EC2 instances and ALB.
+
+Resources:
+
+  WebVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: cfn-web-vpc
