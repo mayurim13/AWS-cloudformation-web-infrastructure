@@ -123,6 +123,31 @@ Resources:
       Tags:
         - Key: Name
           Value: cfn-ec2-sg
+          WebLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateName: cfn-web-launch-template
+      LaunchTemplateData:
+        ImageId: ami-0dee22c13ea7a9a67
+        InstanceType: t3.micro
+        SecurityGroupIds:
+          - !Ref EC2SecurityGroup
+        UserData:
+          Fn::Base64: |
+            #!/bin/bash
+            dnf update -y
+            dnf install -y httpd git
+
+            systemctl enable httpd
+            systemctl start httpd
+
+            cd /tmp
+            git clone https://github.com/mayurim13/aws-cloudformation-web-infrastructure.git
+
+            cp -r aws-cloudformation-web-infrastructure/website/* /var/www/html/
+
+            systemctl restart httpd
+
 
       
       
