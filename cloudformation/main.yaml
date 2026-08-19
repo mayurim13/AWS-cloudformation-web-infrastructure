@@ -16,7 +16,7 @@ Resources:
         - Key: Name
           Value: cfn-web-vpc
 
-      PublicSubnetA:
+  PublicSubnetA:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref WebVPC
