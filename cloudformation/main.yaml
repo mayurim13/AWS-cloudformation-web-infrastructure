@@ -211,6 +211,50 @@ Resources:
       DefaultActions:
         - Type: forward
           TargetGroupArn: !Ref WebTargetGroup
+Outputs:
+
+  VPCId:
+    Description: VPC ID
+    Value: !Ref WebVPC
+
+  LoadBalancerDNS:
+    Description: Application Load Balancer DNS name
+    Value: !GetAtt WebLoadBalancer.DNSName
+
+  WebServerAId:
+    Description: EC2 instance A ID
+    Value: !Ref WebServerA
+
+  WebServerBId:
+    Description: EC2 instance B ID
+    Value: !Ref WebServerB
+WebListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref WebLoadBalancer
+      Protocol: HTTP
+      Port: 80
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref WebTargetGroup
+
+Outputs:
+
+  VPCId:
+    Description: VPC ID
+    Value: !Ref WebVPC
+
+  LoadBalancerDNS:
+    Description: Application Load Balancer DNS name
+    Value: !GetAtt WebLoadBalancer.DNSName
+
+  WebServerAId:
+    Description: EC2 instance A ID
+    Value: !Ref WebServerA
+
+  WebServerBId:
+    Description: EC2 instance B ID
+    Value: !Ref WebServerB
 
 
 
